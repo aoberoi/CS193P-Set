@@ -12,6 +12,9 @@
 		92E77C95206F6B03009F87AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92E77C93206F6B03009F87AD /* Main.storyboard */; };
 		92E77C97206F6B04009F87AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92E77C96206F6B04009F87AD /* Assets.xcassets */; };
 		92E77C9A206F6B04009F87AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92E77C98206F6B04009F87AD /* LaunchScreen.storyboard */; };
+		92E77CA3206F71E1009F87AD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E77CA2206F71E1009F87AD /* Card.swift */; };
+		92E77CA5206F734D009F87AD /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E77CA4206F734D009F87AD /* Deck.swift */; };
+		92E77CA7206F76B6009F87AD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E77CA6206F76B6009F87AD /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		92E77C96206F6B04009F87AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92E77C99206F6B04009F87AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92E77C9B206F6B04009F87AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92E77CA2206F71E1009F87AD /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		92E77CA4206F734D009F87AD /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		92E77CA6206F76B6009F87AD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,9 @@
 				92E77C96206F6B04009F87AD /* Assets.xcassets */,
 				92E77CA1206F6B26009F87AD /* Supporting Files */,
 				92E77C9B206F6B04009F87AD /* Info.plist */,
+				92E77CA2206F71E1009F87AD /* Card.swift */,
+				92E77CA4206F734D009F87AD /* Deck.swift */,
+				92E77CA6206F76B6009F87AD /* Game.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -143,7 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E77CA5206F734D009F87AD /* Deck.swift in Sources */,
+				92E77CA7206F76B6009F87AD /* Game.swift in Sources */,
 				92E77C92206F6B03009F87AD /* ViewController.swift in Sources */,
+				92E77CA3206F71E1009F87AD /* Card.swift in Sources */,
 				92E77C90206F6B03009F87AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
