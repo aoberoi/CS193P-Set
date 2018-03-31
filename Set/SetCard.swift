@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  SetCard.swift
 //  Set
 //
 //  Created by Ankur Oberoi on 3/31/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Card {
+struct SetCard {
     let number: Feature
     let symbol: Feature
     let shading: Feature
@@ -23,8 +23,8 @@ struct Card {
     }
 }
 
-extension Card: Equatable {
-    static func ==(lhs: Card, rhs: Card) -> Bool {
+extension SetCard: Equatable {
+    static func ==(lhs: SetCard, rhs: SetCard) -> Bool {
         return (
             (lhs.number == rhs.number) &&
             (lhs.symbol == rhs.symbol) &&
@@ -48,7 +48,7 @@ extension Collection where Element: Hashable {
     }
 }
 
-extension Collection where Element == Card {
+extension Collection where Element == SetCard {
     func containsSet() -> Bool {
         if count == 3 {
             // note: could do a little better with reflect API
