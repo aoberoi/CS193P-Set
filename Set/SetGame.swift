@@ -14,7 +14,6 @@ struct SetGame {
     private(set) var currentlyPlayed = [SetCard?]()
     
     // this is a subset of the cards in currentlyPlayed
-    // TODO: can we enforce the above, and somehow limit the use of indexes between this and currentlyPlayed?
     private(set) var selectedCards = [SetCard]()
     
     init(maximumCards: Int) {

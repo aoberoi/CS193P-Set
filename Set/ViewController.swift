@@ -27,16 +27,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cardTouched(_ sender: UIButton) {
-        if let index = cardButtons.index(of: sender), let card = game.currentlyPlayed[index] {
+        if let card = card(for: sender) {
             game.select(card: card)
             updateViewFromModel()
         }
     }
     
     private func updateViewFromModel() {
-        for i in cardButtons.indices {
-            let button = cardButtons[i]
-            if i < game.currentlyPlayed.count, let card = game.currentlyPlayed[i] {
+        for button in cardButtons {
+            if let card = card(for: button) {
                 // make the card visible
                 let baseLabel = String(repeating: symbol(for: card.symbol), count: number(for: card.number))
                 let label = NSAttributedString(string: baseLabel, attributes: [
@@ -45,6 +44,7 @@ class ViewController: UIViewController {
                     ])
                 button.setAttributedTitle(label, for: UIControlState.normal)
             } else {
+                // make the card invisible
                 button.isHidden = true
                 button.setAttributedTitle(nil, for: UIControlState.normal)
             }
@@ -55,11 +55,24 @@ class ViewController: UIViewController {
         if (!game.selectedCards.isEmpty) {
             let outlineColor = game.selectedCards.containsSet() ? UIColor.red : UIColor.yellow
             for card in game.selectedCards {
-                let index = game.currentlyPlayed.index(of: card)!
-                let button = cardButtons[index]
+                let button = self.button(for: card)!
                 button.layer.borderColor = outlineColor.cgColor
             }
         }
+    }
+    
+    private func card(for button:UIButton) -> SetCard? {
+        if let index = cardButtons.index(of: button) {
+            return game.currentlyPlayed[index]
+        }
+        return nil
+    }
+    
+    private func button(for card:SetCard) -> UIButton? {
+        if let index = game.currentlyPlayed.index(of: card) {
+            return cardButtons[index]
+        }
+        return nil
     }
     
     private func number(for feature:SetCard.Feature) -> Int {
