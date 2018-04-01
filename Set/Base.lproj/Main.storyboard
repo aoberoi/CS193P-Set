@@ -293,6 +293,9 @@
                                         <rect key="frame" x="40" y="42" width="120" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="New Game"/>
+                                        <connections>
+                                            <action selector="newGameTouched" destination="BYZ-38-t0r" eventType="touchUpInside" id="xcV-YL-Cv9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13o-i5-6Me">
                                         <rect key="frame" x="0.0" y="84" width="200" height="42"/>
@@ -319,6 +322,7 @@
                     </view>
                     <connections>
                         <outlet property="dealThree" destination="13o-i5-6Me" id="AzO-vC-Klv"/>
+                        <outlet property="score" destination="WcJ-rz-AiQ" id="Rf0-DQ-zXf"/>
                         <outletCollection property="cardButtons" destination="lKe-v2-l0J" collectionClass="NSMutableArray" id="Hh6-3b-bzJ"/>
                         <outletCollection property="cardButtons" destination="Aky-93-8LQ" collectionClass="NSMutableArray" id="Cp6-yl-k3R"/>
                         <outletCollection property="cardButtons" destination="ahZ-mB-sAe" collectionClass="NSMutableArray" id="spL-dN-RyF"/>

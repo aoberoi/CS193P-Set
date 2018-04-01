@@ -9,7 +9,6 @@
 import UIKit
 
 // TODO: implement scoring with UI
-// TODO: implement new game with UI
 
 class ViewController: UIViewController {
     
@@ -24,6 +23,7 @@ class ViewController: UIViewController {
         }
     }
     @IBOutlet weak var dealThree: UIButton!
+    @IBOutlet weak var score: UILabel!
     
     private var numberOfEmptySpaces: Int {
         return cardButtons.reduce(0) { $0 + ($1.isHidden ? 1 : 0) }
@@ -43,6 +43,11 @@ class ViewController: UIViewController {
     
     @IBAction func dealThreeTouched(_ sender: UIButton) {
         game.dealMore()
+        updateViewFromModel()
+    }
+    
+    @IBAction func newGameTouched() {
+        game = SetGame()
         updateViewFromModel()
     }
     
