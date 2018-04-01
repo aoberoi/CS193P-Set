@@ -81,6 +81,8 @@ class ViewController: UIViewController {
         }
         
         dealThree.isEnabled = (numberOfEmptySpaces >= 3 || game.selectedCards.containsSet()) && game.deck.cards.count >= 3
+        
+        score.text = "Score: \(game.score)"
     }
     
     private func card(for button:UIButton) -> SetCard? {
@@ -130,8 +132,8 @@ class ViewController: UIViewController {
     
     private func strokeWidth(for shading:SetCard.Feature) -> Double {
         switch shading {
-        case .A: return -3.0 // filled
-        case .B: return 3.0 // outline
+        case .A: return -4.0 // filled
+        case .B: return 4.0 // outline
         case .C: return 0.0 // striped
         }
     }

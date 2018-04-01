@@ -11,6 +11,8 @@ import Foundation
 struct SetGame {
     private(set) var deck = SetDeck()
     private(set) var currentlyPlayed = [SetCard?]()
+    private(set) var score = 0
+    private var scoreIncrementForMatch = 10
     
     // this is a subset of the cards in currentlyPlayed
     private(set) var selectedCards = [SetCard]()
@@ -20,6 +22,11 @@ struct SetGame {
             currentlyPlayed.append(deck.draw())
         }
     }
+    
+    // scoring rules:
+    // 1. each match gives you 10 points
+    // 2. each time you draw 3 more cards (not when there's a matching set) then the points per match goes down 1 (if you've done this the max 4 times, you are now getting 6 points)
+    // 3. each mismatch is -2 points
     
     mutating func select(card: SetCard) {
         if selectedCards.count < 3 {
@@ -31,6 +38,13 @@ struct SetGame {
         
             // adding a card to the selection (there could now be a set)
             selectedCards.append(card)
+            
+            // update score
+            if selectedCards.containsSet() {
+                score += scoreIncrementForMatch
+            } else if selectedCards.count == 3 {
+                score -= 2
+            }
             return
         }
         
@@ -57,6 +71,7 @@ struct SetGame {
             replaceSelected()
             selectedCards = []
         } else {
+            scoreIncrementForMatch -= 1
             for _ in 0..<3 {
                 if let blankSpace = currentlyPlayed.index(of: nil) {
                     currentlyPlayed[blankSpace] = deck.draw()
