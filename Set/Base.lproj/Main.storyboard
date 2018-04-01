@@ -280,23 +280,39 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13o-i5-6Me">
-                                <rect key="frame" x="87.666666666666686" y="748" width="200" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Deal 3 More Cards"/>
-                                <connections>
-                                    <action selector="dealThreeTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EaQ-2q-ZVa"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Di-zm-ewA">
+                                <rect key="frame" x="87.333333333333314" y="664" width="200" height="114"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcJ-rz-AiQ">
+                                        <rect key="frame" x="55.000000000000021" y="0.0" width="90.333333333333314" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydG-VN-j0c">
+                                        <rect key="frame" x="40" y="30" width="120" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="New Game"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13o-i5-6Me">
+                                        <rect key="frame" x="0.0" y="72" width="200" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Deal 3 More Cards"/>
+                                        <connections>
+                                            <action selector="dealThreeTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EaQ-2q-ZVa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="RTM-6x-1Bv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5Yi-SN-Q0s"/>
-                            <constraint firstItem="13o-i5-6Me" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="95M-fw-jcQ"/>
-                            <constraint firstItem="13o-i5-6Me" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="12" id="b9B-ye-yH1"/>
-                            <constraint firstItem="13o-i5-6Me" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RTM-6x-1Bv" secondAttribute="bottom" constant="8" symbolic="YES" id="dGx-J9-rb7"/>
+                            <constraint firstItem="9Di-zm-ewA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RTM-6x-1Bv" secondAttribute="bottom" constant="8" symbolic="YES" id="Kjp-zK-xE0"/>
                             <constraint firstItem="RTM-6x-1Bv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="h7A-41-L7r"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RTM-6x-1Bv" secondAttribute="trailing" constant="16" id="iRj-2o-gu0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Di-zm-ewA" secondAttribute="bottom" id="sj4-P0-9Y2"/>
+                            <constraint firstItem="9Di-zm-ewA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="tIR-iq-guw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
