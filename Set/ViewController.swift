@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var dealThree: UIButton!
     @IBOutlet weak var score: UILabel!
     
-    private var numberOfEmptySpaces: Int {
+    private var emptySpaceCount: Int {
         return cardButtons.reduce(0) { $0 + ($1.isHidden ? 1 : 0) }
     }
     
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cardTouched(_ sender: UIButton) {
-        if let card = card(for: sender) {
+        if let card = findCard(for: sender) {
             game.select(card: card)
             updateViewFromModel()
         }
@@ -53,11 +53,11 @@ class ViewController: UIViewController {
     
     private func updateViewFromModel() {
         for button in cardButtons {
-            if let card = card(for: button) {
+            if let card = findCard(for: button) {
                 // make the card visible
-                let baseLabel = String(repeating: symbol(for: card.symbol), count: number(for: card.number))
+                let baseLabel = String(repeating: symbolRepresentation(for: card.symbol), count: numberRepresentation(for: card.number))
                 let label = NSAttributedString(string: baseLabel, attributes: [
-                    NSAttributedStringKey.foregroundColor: labelColor(card.color, with: card.shading),
+                    NSAttributedStringKey.foregroundColor: colorRepresenting(color: card.color, andShading: card.shading),
                     NSAttributedStringKey.strokeWidth: strokeWidth(for: card.shading)
                     ])
                 button.setAttributedTitle(label, for: UIControlState.normal)
@@ -75,31 +75,31 @@ class ViewController: UIViewController {
         if (!game.selectedCards.isEmpty) {
             let outlineColor = game.selectedCards.containsSet() ? UIColor.red : UIColor.yellow
             for card in game.selectedCards {
-                let button = self.button(for: card)!
+                let button = self.findButton(for: card)!
                 button.layer.borderColor = outlineColor.cgColor
             }
         }
         
-        dealThree.isEnabled = (numberOfEmptySpaces >= 3 || game.selectedCards.containsSet()) && game.deck.cards.count >= 3
+        dealThree.isEnabled = (emptySpaceCount >= 3 || game.selectedCards.containsSet()) && game.deck.cards.count >= 3
         
         score.text = "Score: \(game.score)"
     }
     
-    private func card(for button:UIButton) -> SetCard? {
+    private func findCard(for button:UIButton) -> SetCard? {
         if let index = cardButtons.index(of: button), index < game.currentlyPlayed.count {
             return game.currentlyPlayed[index]
         }
         return nil
     }
     
-    private func button(for card:SetCard) -> UIButton? {
+    private func findButton(for card:SetCard) -> UIButton? {
         if let index = game.currentlyPlayed.index(of: card) {
             return cardButtons[index]
         }
         return nil
     }
     
-    private func number(for feature:SetCard.Feature) -> Int {
+    private func numberRepresentation(for feature:SetCard.Feature) -> Int {
         switch feature {
         case .A: return 1
         case .B: return 2
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private func symbol(for feature:SetCard.Feature) -> Character {
+    private func symbolRepresentation(for feature:SetCard.Feature) -> Character {
         switch feature {
         case .A: return "▲" // diamond
         case .B: return "■" // squiggle
@@ -115,8 +115,7 @@ class ViewController: UIViewController {
         }
     }
     
-    // TODO: not really happy with these argument labels
-    private func labelColor(_ color: SetCard.Feature, with shading:SetCard.Feature) -> UIColor {
+    private func colorRepresenting(color: SetCard.Feature, andShading shading:SetCard.Feature) -> UIColor {
         let baseColor: UIColor = {
             switch color {
             case .A: return UIColor.red
