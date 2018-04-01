@@ -38,12 +38,7 @@ struct SetGame {
         
         if selectedCards.containsSet() {
             // there was a set, now the next card is selected
-
-            // replace each selected card with a new card
-            for selectedCard in selectedCards {
-                let index = currentlyPlayed.index(of: selectedCard)!
-                currentlyPlayed[index] = deck.draw()
-            }
+            replaceSelected()
             
             // update selection
             if (selectedCards.contains(card)) {
@@ -59,10 +54,7 @@ struct SetGame {
     
     mutating func dealMore() {
         if selectedCards.containsSet() {
-            for selectedCard in selectedCards {
-                let index = currentlyPlayed.index(of: selectedCard)!
-                currentlyPlayed[index] = deck.draw()
-            }
+            replaceSelected()
             selectedCards = []
         } else {
             for _ in 0..<3 {
@@ -72,6 +64,13 @@ struct SetGame {
                     currentlyPlayed.append(deck.draw())
                 }
             }
+        }
+    }
+    
+    private mutating func replaceSelected() {
+        for selectedCard in selectedCards {
+            let index = currentlyPlayed.index(of: selectedCard)!
+            currentlyPlayed[index] = deck.draw()
         }
     }
 }
