@@ -9,15 +9,13 @@
 import Foundation
 
 struct SetGame {
-    private let maximumCards: Int
-    private var deck = SetDeck()
+    private(set) var deck = SetDeck()
     private(set) var currentlyPlayed = [SetCard?]()
     
     // this is a subset of the cards in currentlyPlayed
     private(set) var selectedCards = [SetCard]()
     
-    init(maximumCards: Int) {
-        self.maximumCards = maximumCards
+    init() {
         for _ in 0..<12 {
             currentlyPlayed.append(deck.draw())
         }
@@ -56,6 +54,24 @@ struct SetGame {
         } else {
             // deselect all previously selected and select the card this card (yes, it could be part of the previous selection)
             selectedCards.replaceSubrange(0..<3, with: [card])
+        }
+    }
+    
+    mutating func dealMore() {
+        if selectedCards.containsSet() {
+            for selectedCard in selectedCards {
+                let index = currentlyPlayed.index(of: selectedCard)!
+                currentlyPlayed[index] = deck.draw()
+            }
+            selectedCards = []
+        } else {
+            for _ in 0..<3 {
+                if let blankSpace = currentlyPlayed.index(of: nil) {
+                    currentlyPlayed[blankSpace] = deck.draw()
+                } else {
+                    currentlyPlayed.append(deck.draw())
+                }
+            }
         }
     }
 }

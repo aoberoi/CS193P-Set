@@ -8,9 +8,12 @@
 
 import UIKit
 
+// TODO: implement scoring with UI
+// TODO: implement new game with UI
+
 class ViewController: UIViewController {
     
-    private lazy var game = SetGame(maximumCards: cardButtons.count)
+    private lazy var game = SetGame()
 
     @IBOutlet var cardButtons: [UIButton]! {
         didSet {
@@ -19,6 +22,11 @@ class ViewController: UIViewController {
                 button.layer.borderWidth = 3.0
             }
         }
+    }
+    @IBOutlet weak var dealThree: UIButton!
+    
+    private var numberOfEmptySpaces: Int {
+        return cardButtons.reduce(0) { $0 + ($1.isHidden ? 1 : 0) }
     }
     
     override func viewDidLoad() {
@@ -33,6 +41,11 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func dealThreeTouched(_ sender: UIButton) {
+        game.dealMore()
+        updateViewFromModel()
+    }
+    
     private func updateViewFromModel() {
         for button in cardButtons {
             if let card = card(for: button) {
@@ -43,10 +56,12 @@ class ViewController: UIViewController {
                     NSAttributedStringKey.strokeWidth: strokeWidth(for: card.shading)
                     ])
                 button.setAttributedTitle(label, for: UIControlState.normal)
+                button.isHidden = false
             } else {
                 // make the card invisible
                 button.isHidden = true
                 button.setAttributedTitle(nil, for: UIControlState.normal)
+                button.setTitle(nil, for: UIControlState.normal)
             }
             
             button.layer.borderColor = UIColor.black.cgColor
@@ -59,10 +74,12 @@ class ViewController: UIViewController {
                 button.layer.borderColor = outlineColor.cgColor
             }
         }
+        
+        dealThree.isEnabled = (numberOfEmptySpaces >= 3 || game.selectedCards.containsSet()) && game.deck.cards.count >= 3
     }
     
     private func card(for button:UIButton) -> SetCard? {
-        if let index = cardButtons.index(of: button) {
+        if let index = cardButtons.index(of: button), index < game.currentlyPlayed.count {
             return game.currentlyPlayed[index]
         }
         return nil
@@ -108,8 +125,8 @@ class ViewController: UIViewController {
     
     private func strokeWidth(for shading:SetCard.Feature) -> Double {
         switch shading {
-        case .A: return -1.0 // filled
-        case .B: return 1.0 // outline
+        case .A: return -3.0 // filled
+        case .B: return 3.0 // outline
         case .C: return 0.0 // striped
         }
     }
